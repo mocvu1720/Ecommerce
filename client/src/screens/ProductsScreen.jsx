@@ -14,11 +14,12 @@ import { useEffect } from "react";
 
 import { getProducts } from "../redux/actions/productActions";
 import ProductCard from "../components/ProductCard";
+import { productsSelector } from "../redux/slices/products";
 
 const ProductsScreen = () => {
   const dispatch = useDispatch();
 
-  const productList = useSelector((state) => state.products);
+  const productList = useSelector(productsSelector);
   const { loading, error, products } = productList;
 
   useEffect(() => {

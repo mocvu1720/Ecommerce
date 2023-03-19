@@ -1,12 +1,4 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-  useColorModeValue as mode,
-  Badge,
-} from "@chakra-ui/react";
+import { Button, Flex, Heading, Stack, Text, useColorModeValue as mode, Badge } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -51,10 +43,7 @@ const CartOrderSummary = () => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-            $
-            {subtotal <= 1000
-              ? Number(subtotal) + Number(standardShipping)
-              : subtotal}
+            ${subtotal <= 1000 ? Number(subtotal) + Number(standardShipping) : subtotal}
           </Text>
         </Flex>
       </Stack>

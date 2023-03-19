@@ -42,7 +42,6 @@ const ProductScreen = () => {
   }, [dispatch, id, cart]);
 
   const changeAmount = (input) => {
-    console.log("Hello");
     if (input === "minus") {
       setAmount((prevAmount) => prevAmount - 1);
     }

@@ -2,7 +2,7 @@ import express from "express";
 import User from "../models/User.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
-import protectRoute from "../authenticateMiddleware/authMiddleware.js";
+import protect from "../middleware/authMiddleware.js";
 
 const userRoutes = express.Router();
 
@@ -24,8 +24,7 @@ const loginUser = asyncHandler(async (req, res) => {
       createdAt: user.createdAt,
     });
   } else {
-    res.status(401);
-    throw new Error("Invalid email or password");
+    res.status(401).json("Invalid email or password");
   }
 });
 
@@ -35,8 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const userExists = await User.findOne({ email });
 
   if (userExists) {
-    res.status(400);
-    throw new Error("User already exists");
+    res.status(400).json("User already exists");
   }
 
   const user = await User.create({
@@ -52,10 +50,10 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: genToken(user._id),
+      createdAt: user.createdAt,
     });
   } else {
-    res.json(400);
-    throw new Error("Invalid user data");
+    res.json(400).json("Invalid user data");
   }
 });
 
@@ -87,6 +85,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 userRoutes.route("/login").post(loginUser);
 userRoutes.route("/register").post(registerUser);
-userRoutes.route("/profile/:id").put(protectRoute, updateUserProfile);
+userRoutes.route("/profile/:id").put(protect, updateUserProfile);
 
 export default userRoutes;

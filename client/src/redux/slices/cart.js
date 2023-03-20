@@ -59,6 +59,7 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
       localStorage.removeItem("cartItems");
+      localStorage.removeItem("subtotal");
     },
   },
 });

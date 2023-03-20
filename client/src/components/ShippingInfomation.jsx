@@ -9,8 +9,8 @@ import { setShippingAddress, setShippingAddressError } from "../redux/actions/or
 
 const ShippingInfomation = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart);
-  const { expressShipping } = cartItems;
+  const cart = useSelector((state) => state.cart);
+  const { expressShipping } = cart;
   const [formStateChanged, setFormStateChanged] = useState(false);
 
   const setErrorState = (input, data) => {
@@ -38,7 +38,7 @@ const ShippingInfomation = () => {
       {(formik) => (
         <VStack as="form">
           <FormControl
-            onChange={
+            onChange={() =>
               Object.keys(formik.errors).length === 0 && Object.keys(formik.touched).length >= 2
                 ? setErrorState(false, formik.values)
                 : setErrorState(true)
@@ -60,7 +60,7 @@ const ShippingInfomation = () => {
               Shipping Method
             </Heading>
             <RadioGroup
-              defaultValue={expressShipping}
+              defaultValue={`${expressShipping}`}
               onChange={(e) => {
                 console.log(e);
                 dispatch(setExpress(e));

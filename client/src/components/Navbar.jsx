@@ -16,6 +16,7 @@ import {
   Menu,
   MenuList,
   MenuItem,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { Link as ReactLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +25,7 @@ import { GiTechnoHeart } from "react-icons/gi";
 import { useState } from "react";
 import { logout } from "../redux/actions/userActions";
 import { CgProfile } from "react-icons/cg";
-import { MdLocalShipping, MdLogout } from "react-icons/md";
+import { MdLocalShipping, MdLogout, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 
 const ShoppingCartIcon = () => {
@@ -131,6 +132,16 @@ const Navbar = () => {
                     <MdLocalShipping />
                     <Text ml="2">Your Orders</Text>
                   </MenuItem>
+                  {userInfo.isAdmin === "true" && (
+                    <>
+                      <MenuDivider />
+                      <MenuItem as={ReactLink} to="/admin-console">
+                        <MdOutlineAdminPanelSettings />
+                        <Text ml="2">Admin Console</Text>
+                      </MenuItem>
+                      <MenuDivider />
+                    </>
+                  )}
                   <MenuItem onClick={logoutHandler}>
                     <MdLogout />
                     <Text ml="2">Logout</Text>

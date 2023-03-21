@@ -70,7 +70,7 @@ const UsersTab = () => {
       ) : (
         <Box>
           <TableContainer>
-            <Table variant="simple">
+            <Table size="sm" variant="simple">
               <Thead>
                 <Tr>
                   <Th>Name</Th>
@@ -89,7 +89,7 @@ const UsersTab = () => {
                       </Td>
                       <Td>{user.email}</Td>
                       <Td>{new Date(user.createdAt).toLocaleString()}</Td>
-                      <Td>{user.isAdmin === "true" ? <CheckCircleIcon color="green.500" /> : ""}</Td>
+                      <Td>{user.isAdmin === "true" ? <CheckCircleIcon color="orange.500" /> : ""}</Td>
                       <Td>
                         <Button isDisabled={user._id === userInfo._id} onClick={() => openDeleteConfirmBox(user)}>
                           <DeleteIcon mr="5px" />

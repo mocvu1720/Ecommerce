@@ -62,7 +62,6 @@ const ShippingInfomation = () => {
             <RadioGroup
               defaultValue={`${expressShipping}`}
               onChange={(e) => {
-                console.log(e);
                 dispatch(setExpress(e));
               }}
             >

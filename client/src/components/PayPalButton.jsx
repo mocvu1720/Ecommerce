@@ -1,9 +1,9 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { PAYPAL_CLIENT_ID } from "../client_id";
+// import { PAYPAL_CLIENT_ID } from "../client_id";
 
 const PayPalButton = ({ total, onPaymentSuccess, onPaymentError, disabled }) => {
   return (
-    <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID }}>
+    <PayPalScriptProvider options={{ "client-id": process.env.PAYPAL_CLIENT_ID }}>
       <PayPalButtons
         disabled={disabled}
         forceReRender={[total()]}

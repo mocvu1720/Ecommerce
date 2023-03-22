@@ -24,7 +24,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(`${process.env.API_HOST}/api/orders`, preparedOrder, config);
+    const { data } = await axios.post(`https://${process.env.REACT_APP_API_HOST}/api/orders`, preparedOrder, config);
   } catch (error) {
     dispatch(
       setError(

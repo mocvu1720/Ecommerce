@@ -5,7 +5,7 @@ import { setProducts, setLoading, setError, setProduct, productReviewed, resetEr
 export const getProducts = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const { data } = await axios.get(`${process.env.API_HOST}/api/products`);
+    const { data } = await axios.get(`https://${process.env.REACT_APP_API_HOST}/api/products`);
     dispatch(setProducts(data));
   } catch (error) {
     dispatch(
@@ -23,7 +23,7 @@ export const getProducts = () => async (dispatch) => {
 export const getProduct = (id) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const { data } = await axios.get(`${process.env.API_HOST}/api/products/${id}`);
+    const { data } = await axios.get(`https://${process.env.REACT_APP_API_HOST}/api/products/${id}`);
     dispatch(setProduct(data));
   } catch (error) {
     dispatch(
@@ -53,7 +53,7 @@ export const createProductReview = (productId, userId, comment, rating, title) =
       },
     };
     const { data } = await axios.post(
-      `${process.env.API_HOST}/api/products/reviews/${productId}`,
+      `https://${process.env.REACT_APP_API_HOST}/api/products/reviews/${productId}`,
       { comment, userId, rating, title },
       config
     );

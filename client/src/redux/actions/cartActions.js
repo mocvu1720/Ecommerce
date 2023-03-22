@@ -4,7 +4,7 @@ import { setLoading, setError, cartItemAdd, cartItemRemoval, setExpressShipping,
 export const addCartItem = (id, qty) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const { data } = await axios.get(`${process.env.API_HOST}/api/products/${id}`);
+    const { data } = await axios.get(`https://${process.env.REACT_APP_API_HOST}/api/products/${id}`);
     const itemToAdd = {
       id: data._id,
       name: data.name,

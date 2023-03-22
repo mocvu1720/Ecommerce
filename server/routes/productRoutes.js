@@ -118,6 +118,29 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
+const removeProductReview = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.productId);
+
+  const updateReviews = product.reviews.filter((review) => review._id.valueOf() !== req.params.reviewId);
+
+  if (product) {
+    product.reviews = updateReviews;
+    product.numberOfReviews = product.reviews.length;
+
+    if (product.numberOfReviews > 0) {
+      product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length;
+    } else {
+      product.rating = 1;
+    }
+
+    await product.save();
+    res.status(201).json({ message: "Review removed" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 productRoutes.route("/").get(getproducts);
 productRoutes.route("/:id").get(getProduct);
 productRoutes.route("/reviews/:id").post(protectRoute, createProductReview);
@@ -125,5 +148,6 @@ productRoutes.route("/reviews/:id").post(protectRoute, createProductReview);
 productRoutes.route("/").post(protectRoute, admin, createNewProduct);
 productRoutes.route("/").put(protectRoute, admin, updateProduct);
 productRoutes.route("/:id").delete(protectRoute, admin, deleteProduct);
+productRoutes.route("/:productId/:reviewId").put(protectRoute, admin, removeProductReview);
 
 export default productRoutes;
